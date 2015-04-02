@@ -1,4 +1,4 @@
-package ws.miebach.sulumann.barometer;
+package org.smiguel.barometer.barometer;
 
 import android.app.Application;
 import android.test.ApplicationTestCase;

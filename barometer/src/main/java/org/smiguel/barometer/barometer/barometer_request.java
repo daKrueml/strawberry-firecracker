@@ -1,9 +1,11 @@
-package ws.miebach.sulumann.barometer;
+package org.smiguel.barometer.barometer;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import ws.miebach.sulumann.barometer.R;
 
 
 public class barometer_request extends ActionBarActivity {
