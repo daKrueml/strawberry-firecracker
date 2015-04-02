@@ -3,4 +3,5 @@
 
     <string name="hello_world">Hello world!</string>
     <string name="CloseApp">Schicht</string>
+    <string name="SensorList">SensorList-HERE</string>
 </resources>

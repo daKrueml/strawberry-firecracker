@@ -1,12 +1,16 @@
 package org.smiguel.barometer.barometer;
 
+import java.util.List;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
+import android.hardware.Sensor;
+import android.hardware.SensorManager;
+import android.widget.TextView;
 
-import ws.miebach.sulumann.barometer.R;
+import org.smiguel.barometer.R;
 
 
 public class barometer_request extends ActionBarActivity {
@@ -34,6 +38,20 @@ public class barometer_request extends ActionBarActivity {
         EditText NumberBaroData = (EditText)findViewById(R.id.NumberBarometer);
         TextBaroData.setText("Toller Text");
         NumberBaroData.setText("4242");
+
+        SensorManager sMgr;
+        sMgr = (SensorManager)this.getSystemService(SENSOR_SERVICE);
+
+        List<Sensor> list = sMgr.getSensorList(Sensor.TYPE_ALL);
+        StringBuilder data = new StringBuilder();
+
+        for(Sensor sensor: list){
+            data.append(sensor.getName() + "\n");
+           // data.append(sensor.getVendor() + "\n");
+           // data.append(sensor.getVersion() + "\n");
+        }
+        TextView TextSensorOutput = (TextView)findViewById(R.id.SensorList);
+        TextSensorOutput.setText(data);
 
     }
 
