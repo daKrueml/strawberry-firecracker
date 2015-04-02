@@ -1,1 +1,1 @@
-include ':app', ':barometer'
+include ':app',':barometer'
