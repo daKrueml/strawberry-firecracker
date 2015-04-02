@@ -43,10 +43,8 @@
         android:enabled="true"
         android:width="350px"
         android:layout_alignBottom="@+id/LableTextBarometer"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginRight="35dp"
-        android:layout_marginEnd="35dp" />
+        android:layout_alignRight="@+id/SensorList"
+        android:layout_alignEnd="@+id/SensorList" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -64,11 +62,10 @@
         android:textAppearance="?android:attr/textAppearanceMedium"
         android:text="@string/SensorList"
         android:id="@+id/SensorList"
-        android:layout_below="@+id/LabelNumBarometer"
-        android:layout_marginTop="80dp"
-        android:layout_alignRight="@+id/NumberBarometer"
-        android:layout_alignEnd="@+id/NumberBarometer"
+        android:layout_centerVertical="true"
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
 </RelativeLayout>
