@@ -52,7 +52,6 @@ public class barometer_request extends ActionBarActivity {
         }
         TextView TextSensorOutput = (TextView)findViewById(R.id.SensorList);
         TextSensorOutput.setText(data);
-
     }
 
     @Override

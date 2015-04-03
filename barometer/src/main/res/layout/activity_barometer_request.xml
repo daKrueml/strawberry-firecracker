@@ -42,9 +42,9 @@
         android:id="@+id/TextBarometer"
         android:enabled="true"
         android:width="350px"
-        android:layout_alignRight="@+id/SensorList"
-        android:layout_alignEnd="@+id/SensorList"
-        android:layout_below="@+id/NumberBarometer" />
+        android:layout_below="@+id/NumberBarometer"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -55,18 +55,6 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_below="@+id/space2" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/SensorList"
-        android:id="@+id/SensorList"
-        android:layout_below="@+id/space"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
 
     <Space
         android:layout_width="20px"
@@ -87,5 +75,29 @@
         android:layout_alignRight="@+id/NumberBarometer"
         android:layout_alignEnd="@+id/NumberBarometer"
         android:id="@+id/space2" />
+
+    <ScrollView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/SensorScrollList"
+        android:layout_below="@+id/space"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="29dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:fillViewport="false">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/SensorList"
+            android:id="@+id/SensorList"
+            android:visibility="visible"
+            android:layout_alignTop="@+id/SensorScrollList"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+    </ScrollView>
 
 </RelativeLayout>
