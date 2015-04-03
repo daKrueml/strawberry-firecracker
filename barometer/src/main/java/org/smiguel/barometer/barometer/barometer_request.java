@@ -87,8 +87,10 @@ public class barometer_request extends Activity {
             // this.setBaroNumberData(String.valueOf(mService.getRandomNumber()));
             this.setBaroNumberData("TEST");
 
-            // TODO: Causing NullPointerException... 'Cause mService is not valid...maybe...
+
+            mService = new BarometerSrv();
             iTest = mService.getRandomNumber();
+
         }
 
         // doUnbindService();
