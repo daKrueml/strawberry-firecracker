@@ -90,6 +90,7 @@ public class barometer_request extends Activity {
 
             mService = new BarometerSrv();
             iTest = mService.getRandomNumber();
+            this.setBaroNumberData(Integer.toString(iTest));
 
         }
 
