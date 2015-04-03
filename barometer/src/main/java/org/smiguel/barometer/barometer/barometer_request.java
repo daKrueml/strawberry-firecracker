@@ -1,7 +1,14 @@
 package org.smiguel.barometer.barometer;
 
 import java.util.List;
-import android.support.v7.app.ActionBarActivity;
+
+import android.app.Activity;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
+// import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -10,15 +17,54 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.widget.TextView;
 
+import org.smiguel.barometer.BarometerSrv;
 import org.smiguel.barometer.R;
 
 
-public class barometer_request extends ActionBarActivity {
+public class barometer_request extends Activity {
+
+    private BarometerSrv mService;
+    boolean mBound = false;
+
+    /** Defines callbacks for service binding, passed to bindService() */
+    private ServiceConnection mConnection = new ServiceConnection() {
+        public void onServiceConnected(ComponentName className, IBinder service) {
+            // We've bound to LocalService, cast the IBinder and get LocalService instance
+            mService = ((BarometerSrv.LocalBinder)service).getService();
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName className) {
+            mService = null;
+        }
+    };
+
+   void doBindService() {
+       bindService(new Intent(barometer_request.this,BarometerSrv.class), mConnection, Context.BIND_AUTO_CREATE);
+       mBound = true;
+   }
+
+    void doUnbindService() {
+        if (mBound) {
+            // Detach our existing connection.
+            unbindService(mConnection);
+            mBound = false;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        doUnbindService();
+    }
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         setContentView(R.layout.activity_barometer_request);
+
     }
 
 
@@ -32,12 +78,21 @@ public class barometer_request extends ActionBarActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        // The activity is about to become visible.
+        int iTest=0;
 
-        EditText TextBaroData = (EditText)findViewById(R.id.TextBarometer);
-        EditText NumberBaroData = (EditText)findViewById(R.id.NumberBarometer);
-        TextBaroData.setText("Toller Text");
-        NumberBaroData.setText("4242");
+        // The activity is about to become visible.
+        doBindService();
+
+        if(mBound) {
+            // this.setBaroNumberData(String.valueOf(mService.getRandomNumber()));
+            this.setBaroNumberData("TEST");
+
+            // TODO: Causing NullPointerException... 'Cause mService is not valid...maybe...
+            iTest = mService.getRandomNumber();
+        }
+
+        // doUnbindService();
+
 
         SensorManager sMgr;
         sMgr = (SensorManager)this.getSystemService(SENSOR_SERVICE);
@@ -68,4 +123,17 @@ public class barometer_request extends ActionBarActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    public void setBaroTextData(String sBaroTextData) {
+        EditText TextBaroData = (EditText)findViewById(R.id.TextBarometer);
+        TextBaroData.setText(sBaroTextData);
+    }
+
+    public void setBaroNumberData(String sBaroNumberData) {
+        EditText NumberBaroData = (EditText)findViewById(R.id.NumberBarometer);
+        NumberBaroData.setText(sBaroNumberData);
+    }
+
+
 }
+
