@@ -8,7 +8,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
-// import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -39,10 +38,10 @@ public class barometer_request extends Activity {
         }
     };
 
-   void doBindService() {
-       bindService(new Intent(barometer_request.this,BarometerSrv.class), mConnection, Context.BIND_AUTO_CREATE);
-       mBound = true;
-   }
+    void doBindService() {
+        mBound = bindService(new Intent(barometer_request.this,BarometerSrv.class), mConnection, Context.BIND_AUTO_CREATE);
+        // mBound = true;
+    }
 
     void doUnbindService() {
         if (mBound) {
@@ -58,7 +57,6 @@ public class barometer_request extends Activity {
         doUnbindService();
     }
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,7 +64,6 @@ public class barometer_request extends Activity {
         setContentView(R.layout.activity_barometer_request);
 
     }
-
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -80,15 +77,17 @@ public class barometer_request extends Activity {
         super.onStart();
         int iTest=0;
 
+        // TODO: That's not the way how it should work. mService is declared globally and is initialized by "onServiceConnected", which is called when bindService() is successful.
+        // So... when doBindService() is called, everything is called but mService obviously must not be used here...BAD ;(
+        mService = new BarometerSrv();
+
         // The activity is about to become visible.
         doBindService();
 
         if(mBound) {
-            // this.setBaroNumberData(String.valueOf(mService.getRandomNumber()));
-            this.setBaroNumberData("TEST");
+            setBaroNumberData(String.valueOf(mService.getRandomNumber()));
+            // this.setBaroNumberData("TEST");
 
-
-            mService = new BarometerSrv();
             iTest = mService.getRandomNumber();
             this.setBaroNumberData(Integer.toString(iTest));
 
